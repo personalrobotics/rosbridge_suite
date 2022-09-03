@@ -248,7 +248,7 @@ class Subscribe(Capability):
             for glob in Subscribe.topics_glob:
                 if fnmatch.fnmatch(topic, glob):
                     self.protocol.log(
-                        "debug",
+                        "info",
                         "Found match with glob " + glob + ", continuing subscription...",
                     )
                     match = True
@@ -295,7 +295,7 @@ class Subscribe(Capability):
             for glob in Subscribe.topics_glob:
                 if fnmatch.fnmatch(topic, glob):
                     self.protocol.log(
-                        "debug",
+                        "info",
                         "Found match with glob " + glob + ", continuing unsubscription...",
                     )
                     match = True
@@ -338,7 +338,7 @@ class Subscribe(Capability):
             for glob in Subscribe.topics_glob:
                 if fnmatch.fnmatch(topic, glob):
                     self.protocol.log(
-                        "debug",
+                        "info",
                         "Found match with glob " + glob + ", continuing topic publish...",
                     )
                     match = True

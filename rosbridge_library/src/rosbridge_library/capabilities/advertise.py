@@ -117,7 +117,7 @@ class Advertise(Capability):
             for glob in Advertise.topics_glob:
                 if fnmatch.fnmatch(topic, glob):
                     self.protocol.log(
-                        "debug",
+                        "info",
                         "Found match with glob " + glob + ", continuing advertisement...",
                     )
                     match = True
@@ -152,7 +152,7 @@ class Advertise(Capability):
             for glob in Advertise.topics_glob:
                 if fnmatch.fnmatch(topic, glob):
                     self.protocol.log(
-                        "debug",
+                        "info",
                         "Found match with glob " + glob + ", continuing unadvertisement...",
                     )
                     match = True

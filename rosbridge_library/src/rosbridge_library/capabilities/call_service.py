@@ -69,13 +69,13 @@ class CallService(Capability):
 
         if CallService.services_glob is not None and CallService.services_glob:
             self.protocol.log(
-                "debug", "Service security glob enabled, checking service: " + service
+                "info", "Service security glob enabled, checking service: " + service
             )
             match = False
             for glob in CallService.services_glob:
                 if fnmatch.fnmatch(service, glob):
                     self.protocol.log(
-                        "debug",
+                        "info",
                         "Found match with glob " + glob + ", continuing service call...",
                     )
                     match = True

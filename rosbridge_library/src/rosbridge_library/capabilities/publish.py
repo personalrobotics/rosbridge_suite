@@ -69,7 +69,7 @@ class Publish(Capability):
             for glob in Publish.topics_glob:
                 if fnmatch.fnmatch(topic, glob):
                     self.protocol.log(
-                        "debug",
+                        "info",
                         "Found match with glob " + glob + ", continuing publish...",
                     )
                     match = True

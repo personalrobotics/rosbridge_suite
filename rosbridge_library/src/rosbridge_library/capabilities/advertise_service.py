@@ -102,14 +102,14 @@ class AdvertiseService(Capability):
 
         if AdvertiseService.services_glob is not None and AdvertiseService.services_glob:
             self.protocol.log(
-                "debug",
+                "info",
                 "Service security glob enabled, checking service: " + service_name,
             )
             match = False
             for glob in AdvertiseService.services_glob:
                 if fnmatch.fnmatch(service_name, glob):
                     self.protocol.log(
-                        "debug",
+                        "info",
                         "Found match with glob " + glob + ", continuing service advertisement...",
                     )
                     match = True
@@ -123,7 +123,7 @@ class AdvertiseService(Capability):
                 return
         else:
             self.protocol.log(
-                "debug", "No service security glob, not checking service advertisement."
+                "info", "No service security glob, not checking service advertisement."
             )
 
         # check for an existing entry

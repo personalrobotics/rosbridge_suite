@@ -22,14 +22,14 @@ class UnadvertiseService(Capability):
 
         if UnadvertiseService.services_glob is not None and UnadvertiseService.services_glob:
             self.protocol.log(
-                "debug",
+                "info",
                 "Service security glob enabled, checking service: " + service_name,
             )
             match = False
             for glob in UnadvertiseService.services_glob:
                 if fnmatch.fnmatch(service_name, glob):
                     self.protocol.log(
-                        "debug",
+                        "info",
                         "Found match with glob " + glob + ", continuing service unadvertisement...",
                     )
                     match = True
@@ -43,7 +43,7 @@ class UnadvertiseService(Capability):
                 return
         else:
             self.protocol.log(
-                "debug",
+                "info",
                 "No service security glob, not checking service unadvertisement...",
             )
 
