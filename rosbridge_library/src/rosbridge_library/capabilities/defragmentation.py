@@ -117,7 +117,7 @@ class Defragment(Capability, threading.Thread):
             return
 
         log_msg = "fragment for messageID: " + str(msg_id) + " received."
-        self.protocol.log("debug", log_msg)
+        self.protocol.log("info", log_msg)
 
         # Create fragment container if none exists yet
         if msg_id not in self.received_fragments.keys():
@@ -128,7 +128,7 @@ class Defragment(Capability, threading.Thread):
                 "fragment_list": {},
             }
             log_msg = "opened new fragment list for messageID " + str(msg_id)
-            self.protocol.log("debug", log_msg)
+            self.protocol.log("info", log_msg)
 
         # print "received fragments:", len(self.received_fragments[msg_id]["fragment_list"].keys())
 
@@ -149,7 +149,7 @@ class Defragment(Capability, threading.Thread):
                     str(msg_id),
                 ]
             )
-            self.protocol.log("debug", "".join(log_msg))
+            self.protocol.log("info", "".join(log_msg))
         else:
             log_msg = "error while trying to append fragment " + str(msg_num)
             self.protocol.log("error", log_msg)
@@ -164,7 +164,7 @@ class Defragment(Capability, threading.Thread):
             log_msg = ["enough/all fragments for messageID " + str(msg_id) + " received"]
             log_msg.extend([" [", str(existing_fragments), "]"])
             log_msg = "".join(log_msg)
-            self.protocol.log("debug", log_msg)
+            self.protocol.log("info", log_msg)
             # Check each fragment matches up
             received_all_fragments = True
             for i in range(0, announced_total):
@@ -178,7 +178,7 @@ class Defragment(Capability, threading.Thread):
 
         if received_all_fragments:
             log_msg = "reconstructing original message " + str(msg_id)
-            self.protocol.log("debug", log_msg)
+            self.protocol.log("info", log_msg)
 
             # Reconstruct the message
             reconstructed_msg = "".join(self.received_fragments[msg_id]["fragment_list"].values())
@@ -186,7 +186,7 @@ class Defragment(Capability, threading.Thread):
             log_msg = ["reconstructed original message:\n"]
             log_msg.append(reconstructed_msg)
             log_msg = "".join(log_msg)
-            self.protocol.log("debug", log_msg)
+            self.protocol.log("info", log_msg)
 
             duration = datetime.now() - now
 
@@ -203,7 +203,7 @@ class Defragment(Capability, threading.Thread):
             # Remove fragmentation container
             del self.received_fragments[msg_id]
             log_msg = "removed fragment list for messageID " + str(msg_id)
-            self.protocol.log("debug", log_msg)
+            self.protocol.log("info", log_msg)
 
     def finish(self):
         self.received_fragments = None

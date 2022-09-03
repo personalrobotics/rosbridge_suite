@@ -64,7 +64,7 @@ class Publish(Capability):
         queue_size = message.get("queue_size", 100)
 
         if Publish.topics_glob is not None and Publish.topics_glob:
-            self.protocol.log("debug", "Topic security glob enabled, checking topic: " + topic)
+            self.protocol.log("info", "Topic security glob enabled, checking topic: " + topic)
             match = False
             for glob in Publish.topics_glob:
                 if fnmatch.fnmatch(topic, glob):
@@ -80,7 +80,7 @@ class Publish(Capability):
                 )
                 return
         else:
-            self.protocol.log("debug", "No topic security glob, not checking publish.")
+            self.protocol.log("info", "No topic security glob, not checking publish.")
 
         # Register as a publishing client, propagating any exceptions
         client_id = self.protocol.client_id

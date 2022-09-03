@@ -87,7 +87,7 @@ class CallService(Capability):
                 )
                 return
         else:
-            self.protocol.log("debug", "No service security glob, not checking service call.")
+            self.protocol.log("info", "No service security glob, not checking service call.")
 
         # Check for deprecated service ID, eg. /rosbridge/topics#33
         cid = extract_id(service, cid)
