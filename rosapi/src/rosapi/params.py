@@ -230,11 +230,11 @@ def _get_param_names(node_name):
 
     ready = client.wait_for_service(timeout_sec=5.0)
     if not ready:
-        raise RuntimeError("Wait for list_parameters service timed out")
+        return []
 
     request = ListParameters.Request()
     future = client.call_async(request)
-    rclpy.spin_until_future_complete(_node, future)
+    rclpy.spin_until_future_complete(_node, future, timeout_sec=1.0)
     response = future.result()
 
     if response is not None:
