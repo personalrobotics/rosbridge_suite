@@ -350,7 +350,7 @@ class Subscribe(Capability):
                 )
                 return
         else:
-            self.protocol.log("info", "No topic security glob, not checking topic publish.")
+            self.protocol.log("debug", "No topic security glob, not checking topic publish.")
 
         outgoing_msg = {"op": "publish", "topic": topic}
         if compression == "png":
