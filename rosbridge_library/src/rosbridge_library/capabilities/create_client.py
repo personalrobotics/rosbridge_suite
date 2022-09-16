@@ -142,7 +142,7 @@ class createActionClient(Capability):
         self.protocol.send(outgoing_message)
 
     def _failure(self, cid, action_type, exc):
-        self.protocol.log("error", "call_service %s: %s" % (type(exc).__name__, str(exc)), cid)
+        #self.protocol.node_handle.get_logger().info(f"error {str(exc)}")
         outgoing_message = {
             "op": "service_response",
             "type": action_type,
@@ -155,7 +155,7 @@ class createActionClient(Capability):
         self.protocol.send(outgoing_message)
     
     def _feedback(self, cid, action_type, message):
-        self.protocol.node_handle.get_logger().info(f"feedback callback msg =  {message}")
+        #self.protocol.node_handle.get_logger().info(f"feedback callback msg =  {message}")
         outgoing_message = {
             "op": "service_response",
             "type": action_type,

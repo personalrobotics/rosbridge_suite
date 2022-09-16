@@ -108,7 +108,7 @@ class ActionCaller(Thread):
                 break
         
         status = result_future.result().status
-       # self.node_handle.get_logger().info(f"Action  status =  {status}")    
+        self.node_handle.get_logger().info(f"Action  status =  {status}")    
         #node_handle.get_logger().info(f" result : = {result_future.result()} ")
 
         if status == goal_status.STATUS_SUCCEEDED:

@@ -69,13 +69,13 @@ class CallService(Capability):
 
         if CallService.services_glob is not None and CallService.services_glob:
             self.protocol.log(
-                "info", "Service security glob enabled, checking service: " + service
+                "debug", "Service security glob enabled, checking service: " + service
             )
             match = False
             for glob in CallService.services_glob:
                 if fnmatch.fnmatch(service, glob):
                     self.protocol.log(
-                        "info",
+                        "debug",
                         "Found match with glob " + glob + ", continuing service call...",
                     )
                     match = True
@@ -87,7 +87,7 @@ class CallService(Capability):
                 )
                 return
         else:
-            self.protocol.log("info", "No service security glob, not checking service call.")
+            self.protocol.log("debug", "No service security glob, not checking service call.")
 
         # Check for deprecated service ID, eg. /rosbridge/topics#33
         cid = extract_id(service, cid)
