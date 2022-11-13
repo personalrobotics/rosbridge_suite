@@ -5,7 +5,7 @@ from collections import namedtuple
 
 from rcl_interfaces.msg import ParameterType
 
-Globs = namedtuple("Globs", ["topics", "services", "params"])
+Globs = namedtuple("Globs", ["topics", "services", "params", "actions"])
 
 
 def get_globs(node):
@@ -25,7 +25,8 @@ def get_globs(node):
     topics_glob = get_param("topics_glob")
     services_glob = get_param("services_glob")
     params_glob = get_param("params_glob")
-    return Globs(topics_glob, services_glob, params_glob)
+    actions_glob = get_param("actions_glob")
+    return Globs(topics_glob, services_glob, params_glob, actions_glob)
 
 
 def filter_globs(globs, full_list):
