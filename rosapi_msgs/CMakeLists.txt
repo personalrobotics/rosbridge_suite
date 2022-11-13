@@ -7,6 +7,10 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   msg/TypeDef.msg
+  srv/ActionFeedbackDetails.srv
+  srv/ActionGoalDetails.srv
+  srv/ActionResultDetails.srv
+  srv/ActionType.srv
   srv/DeleteParam.srv
   srv/GetActionServers.srv
   srv/GetParam.srv
