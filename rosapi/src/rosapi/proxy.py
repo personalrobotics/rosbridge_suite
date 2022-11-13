@@ -39,6 +39,7 @@ from ros2node.api import (
 )
 from ros2service.api import get_service_names, get_service_names_and_types
 from ros2topic.api import get_topic_names, get_topic_names_and_types
+from ros2action.api import get_action_names, get_action_names_and_types, get_action_clients_and_servers
 
 from .glob_helper import any_match, filter_globs
 
@@ -87,6 +88,12 @@ def get_services_and_types(services_glob, include_hidden=False):
         services_glob,
         get_service_names_and_types,
         include_hidden_services=include_hidden,
+    )
+
+def get_actions_and_types(actions_glob):
+    return get_publications_and_types(
+        actions_glob,
+        get_action_clients_and_servers
     )
 
 
@@ -159,10 +166,10 @@ def get_node_service_types(node_name):
     return [service.types[0] for service in services]
 
 
-def get_topic_type(topic, topics_glob):
+def get_topic_type(topic, topics_glob, include_hidden=False):
     """Returns the type of the specified ROS topic"""
     # Note: this doesn't consider hidden topics.
-    topics, types = get_topics_and_types(topics_glob)
+    topics, types = get_topics_and_types(topics_glob, include_hidden=include_hidden)
     try:
         return types[topics.index(topic)]
     except ValueError:
@@ -209,6 +216,18 @@ def get_service_type(service, services_glob):
         # Return empty string if the service is not present.
         return ""
 
+def get_action_type(action, actions_glob):
+    """Returns the type of the specified ROS action,"""
+    # Note: this doesn't consider hidden services.
+    action_clients, action_servers = get_action_clients_and_servers(
+                    node=_node,
+                    action_name=action,
+                )
+    try:
+        return action_servers
+    except ValueError:
+        # Return empty string if the service is not present.
+        return ""
 
 def get_channel_info(channel, channels_glob, getter_function, include_hidden=False):
     """Returns a list of node names that are publishing / subscribing to the specified topic,
