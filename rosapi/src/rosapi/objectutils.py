@@ -31,8 +31,8 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from collections.abc import Sequence
 import inspect
+from collections.abc import Sequence
 
 from rosapi.stringify_field_types import stringify_field_types
 from rosbridge_library.internal import ros_loader
@@ -122,6 +122,7 @@ def get_service_response_typedef_recursive(servicetype):
     # Return the list of sub-typedefs
     return _get_subtypedefs_recursive(typedef, [])
 
+
 def get_action_goal_typedef_recursive(actiontype):
     """Returns a list of typedef dicts for this type and all contained type fields"""
     # Get an instance of the service request class and get its typedef
@@ -130,6 +131,7 @@ def get_action_goal_typedef_recursive(actiontype):
 
     # Return the list of sub-typedefs
     return _get_subtypedefs_recursive(typedef, [])
+
 
 def get_action_feedback_typedef_recursive(actiontype):
     """Returns a list of typedef dicts for this type and all contained type fields"""
@@ -140,6 +142,7 @@ def get_action_feedback_typedef_recursive(actiontype):
     # Return the list of sub-typedefs
     return _get_subtypedefs_recursive(typedef, [])
 
+
 def get_action_result_typedef_recursive(actiontype):
     """Returns a list of typedef dicts for this type and all contained type fields"""
     # Get an instance of the service request class and get its typedef
@@ -148,6 +151,7 @@ def get_action_result_typedef_recursive(actiontype):
 
     # Return the list of sub-typedefs
     return _get_subtypedefs_recursive(typedef, [])
+
 
 def get_typedef_full_text(ty):
     """Returns the full text (similar to `gendeps --cat`) for the specified message type"""
@@ -277,7 +281,7 @@ def _type_name(type, instance):
 
     # If the instance is a list, then we can get no more information from the instance.
     # However, luckily, the 'type' field for list types is usually already inflated to the full type.
-    if (isinstance(instance, Sequence)):
+    if isinstance(instance, Sequence):
         return type[9:-1]
 
     # Otherwise, the type will come from the module and class name of the instance

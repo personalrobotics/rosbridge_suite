@@ -214,7 +214,7 @@ def _get_class(typestring, subname, cache, lock):
     if cls is not None:
         return cls
 
-    classname = classname.split(',') #Edgecase  classname, 1 ex. rcl_interface describe parameter  
+    classname = classname.split(",")  # Edgecase  classname, 1 ex. rcl_interface describe parameter
     # Load the class
     cls = _load_class(modname, subname, classname[0])
 

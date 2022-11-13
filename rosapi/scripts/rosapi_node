@@ -281,8 +281,7 @@ class Rosapi(Node):
         """Called by the rosapi/ActionGoalDetails service. Given the name of a action type, returns the TypeDef
         for the goal message of that action type."""
         response.typedefs = [
-            dict_to_typedef(d)
-            for d in objectutils.get_action_goal_typedef_recursive(request.type)
+            dict_to_typedef(d) for d in objectutils.get_action_goal_typedef_recursive(request.type)
         ]
         return response
 

@@ -31,6 +31,7 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
+from ros2action.api import get_action_clients_and_servers
 from ros2node.api import (
     get_node_names,
     get_publisher_info,
@@ -39,7 +40,6 @@ from ros2node.api import (
 )
 from ros2service.api import get_service_names, get_service_names_and_types
 from ros2topic.api import get_topic_names, get_topic_names_and_types
-from ros2action.api import get_action_names, get_action_names_and_types, get_action_clients_and_servers
 
 from .glob_helper import any_match, filter_globs
 
@@ -90,11 +90,9 @@ def get_services_and_types(services_glob, include_hidden=False):
         include_hidden_services=include_hidden,
     )
 
+
 def get_actions_and_types(actions_glob):
-    return get_publications_and_types(
-        actions_glob,
-        get_action_clients_and_servers
-    )
+    return get_publications_and_types(actions_glob, get_action_clients_and_servers)
 
 
 def get_services_for_type(service_type, services_glob, include_hidden=False):
@@ -216,18 +214,20 @@ def get_service_type(service, services_glob):
         # Return empty string if the service is not present.
         return ""
 
+
 def get_action_type(action, actions_glob):
     """Returns the type of the specified ROS action,"""
     # Note: this doesn't consider hidden services.
     action_clients, action_servers = get_action_clients_and_servers(
-                    node=_node,
-                    action_name=action,
-                )
+        node=_node,
+        action_name=action,
+    )
     try:
         return action_servers
     except ValueError:
         # Return empty string if the service is not present.
         return ""
+
 
 def get_channel_info(channel, channels_glob, getter_function, include_hidden=False):
     """Returns a list of node names that are publishing / subscribing to the specified topic,
