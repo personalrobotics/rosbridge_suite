@@ -202,8 +202,8 @@ def _get_typedef(instance):
         example = field_instance
         if arraylen >= 0:
             example = []
-        elif field_type not in atomics:
-            example = {}
+        elif field_type not in atomics and field_instance !=[]:
+           example = {}
         examples.append(str(example))
 
     # Add pseudo constants names and values filtering members
