@@ -109,16 +109,16 @@ class MultiSubscriber:
         # - https://docs.ros.org/en/rolling/Concepts/About-Quality-of-Service-Settings.html
         # - https://github.com/RobotWebTools/rosbridge_suite/issues/551
         qos = QoSProfile(
-            depth=10,
+            depth=1,
             durability=DurabilityPolicy.VOLATILE,
-            reliability=ReliabilityPolicy.RELIABLE,
+            reliability=ReliabilityPolicy.BEST_EFFORT,
         )
 
         infos = node_handle.get_publishers_info_by_topic(topic)
         if any(pub.qos_profile.durability == DurabilityPolicy.TRANSIENT_LOCAL for pub in infos):
             qos.durability = DurabilityPolicy.TRANSIENT_LOCAL
-        if any(pub.qos_profile.reliability == ReliabilityPolicy.BEST_EFFORT for pub in infos):
-            qos.reliability = ReliabilityPolicy.BEST_EFFORT
+        if any(pub.qos_profile.reliability == ReliabilityPolicy.RELIABLE for pub in infos):
+            qos.reliability = ReliabilityPolicy.RELIABLE
 
         # Create the subscriber and associated member variables
         # Subscriptions is initialized with the current client to start with.
